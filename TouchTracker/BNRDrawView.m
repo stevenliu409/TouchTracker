@@ -63,7 +63,7 @@
         line.begin = location;
         line.end = location;
         
-        NSValue *key = [NSValue valueWithNonretainedObject:t];
+        NSValue *key = [NSValue valueWithNonretainedObject:t]; // Use the memory address of the object as a key 
         self.linesInProgress[key] = line;
     }
     
