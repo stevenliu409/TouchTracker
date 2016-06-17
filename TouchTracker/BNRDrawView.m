@@ -11,7 +11,6 @@
 
 @interface BNRDrawView()
 
-@property (nonatomic, strong) BNRLine *currentLine;
 @property (nonatomic, strong) NSMutableDictionary *linesInProgress;
 @property (nonatomic, strong) NSMutableArray *finishedLines;
 @end
@@ -49,27 +48,39 @@
         [self strokeLine:line];
     }
     
-    if(self.currentLine) {
-        [[UIColor redColor] set];
-        [self strokeLine:self.currentLine];
+    [[UIColor redColor] set];
+    for (NSValue *key in self.linesInProgress) {
+        [self strokeLine:self.linesInProgress[key]];
     }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    // touches (when the multitouch is disabled) only contain one object therefore when you call anyObject it will always return that 1 touch event made by that 1 finger
-    CGPoint location = [[touches anyObject] locationInView:self];
-    
-    self.currentLine = [[BNRLine alloc] init];
-    self.currentLine.begin = location;
-    self.currentLine.end = location;
+    NSLog(@"%@", NSStringFromSelector(_cmd)); // log the name of the current method
+    for (UITouch *t in touches) {
+        CGPoint location = [t locationInView:self];
+        BNRLine *line = [[BNRLine alloc] init];
+        line.begin = location;
+        line.end = location;
+        
+        NSValue *key = [NSValue valueWithNonretainedObject:t];
+        self.linesInProgress[key] = line;
+    }
     
     [self setNeedsDisplay];
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    self.currentLine.end = [[touches anyObject] locationInView:self];
+
+    NSLog(@"%@", NSStringFromSelector(_cmd)); // log the name of the current method
+    
+    for (UITouch *t in touches) {
+        NSValue *key = [NSValue valueWithNonretainedObject:t];
+        BNRLine *line = self.linesInProgress[key];
+        line.end = [t locationInView:self];
+    }
+    
     
     [self setNeedsDisplay];
 }
@@ -77,8 +88,15 @@
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
-    [self.finishedLines addObject:self.currentLine];
-    self.currentLine = nil;
+    NSLog(@"%@", NSStringFromSelector(_cmd)); // log the name of the current method
+
+    for (UITouch *t in touches) {
+        NSValue *key = [NSValue valueWithNonretainedObject:t];
+        BNRLine *line = self.linesInProgress[key];
+        [self.finishedLines addObject:line];
+        [self.linesInProgress removeObjectForKey:key];
+    }
+    
     [self setNeedsDisplay];
     
 }
