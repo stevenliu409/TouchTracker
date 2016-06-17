@@ -30,6 +30,8 @@
 
 - (void)strokeLine:(BNRLine *)line
 {
+    
+    [line.color set];
     UIBezierPath *bp = [UIBezierPath bezierPath];
     bp.lineWidth = 10;
     bp.lineCapStyle = kCGLineCapRound;
@@ -41,7 +43,6 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    [[UIColor blackColor] set];
     for (BNRLine *line in self.finishedLines) {
         [self strokeLine:line];
     }
@@ -91,6 +92,7 @@
     for (UITouch *t in touches) {
         NSValue *key = [NSValue valueWithNonretainedObject:t];
         BNRLine *line = self.linesInProgress[key];
+        line.color = [self randomColor];
         [self.finishedLines addObject:line];
         [self.linesInProgress removeObjectForKey:key];
     }
@@ -110,6 +112,17 @@
     }
     
     [self setNeedsDisplay];
+}
+
+-(UIColor *)randomColor
+{
+    
+    float red = (arc4random() % 100)/100.0;
+    float green = (arc4random() % 100)/100.0;
+    float blue = (arc4random() % 100)/100.0;
+
+    UIColor *color = [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
+    return color;
 }
 
 @end

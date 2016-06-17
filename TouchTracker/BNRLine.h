@@ -12,9 +12,8 @@
 
 @interface BNRLine : NSObject <NSCoding>
 
-@property (nonatomic) CGPoint begin;
-@property (nonatomic) CGPoint end;
-
-
+@property (nonatomic, assign) CGPoint begin;
+@property (nonatomic, assign) CGPoint end;
+@property (nonatomic, strong) UIColor *color;
 
 @end
