@@ -92,7 +92,7 @@
     for (UITouch *t in touches) {
         NSValue *key = [NSValue valueWithNonretainedObject:t];
         BNRLine *line = self.linesInProgress[key];
-        line.color = [self randomColor];
+        line.color = [self colorWithLine:line];
         [self.finishedLines addObject:line];
         [self.linesInProgress removeObjectForKey:key];
     }
@@ -113,6 +113,22 @@
     
     [self setNeedsDisplay];
 }
+
+
+- (UIColor *)colorWithLine:(BNRLine *)line
+{
+    //Quad1
+    if (line.begin.x <= line.end.x && line.begin.y <= line.end.y ) {
+        return [UIColor orangeColor];
+    } else if (line.begin.x >= line.end.x && line.begin.y < line.end.y){
+        return [UIColor greenColor];
+    } else if (line.begin.x > line.end.x && line.begin.y >= line.end.y) {
+        return [UIColor blueColor];
+    } else {
+        return [UIColor yellowColor];
+    }
+}
+
 
 -(UIColor *)randomColor
 {
