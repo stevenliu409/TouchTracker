@@ -27,20 +27,6 @@
     return self;
 }
 
-
-- (void)strokeLine:(BNRLine *)line
-{
-    
-    [line.color set];
-    UIBezierPath *bp = [UIBezierPath bezierPath];
-    bp.lineWidth = 10;
-    bp.lineCapStyle = kCGLineCapRound;
-    [bp moveToPoint:line.begin];
-    [bp addLineToPoint:line.end];
-    [bp stroke];
-}
-
-
 - (void)drawRect:(CGRect)rect
 {
     for (BNRLine *line in self.finishedLines) {
@@ -84,7 +70,6 @@
     [self setNeedsDisplay];
 }
 
-
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"%@", NSStringFromSelector(_cmd)); // log the name of the current method
@@ -101,7 +86,6 @@
     
 }
 
-
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"%@", NSStringFromSelector(_cmd)); // log the name of the current method
@@ -114,25 +98,33 @@
     [self setNeedsDisplay];
 }
 
+- (void)strokeLine:(BNRLine *)line
+{
+    
+    [line.color set];
+    UIBezierPath *bp = [UIBezierPath bezierPath];
+    bp.lineWidth = 10;
+    bp.lineCapStyle = kCGLineCapRound;
+    [bp moveToPoint:line.begin];
+    [bp addLineToPoint:line.end];
+    [bp stroke];
+}
 
 - (UIColor *)colorWithLine:(BNRLine *)line
 {
-    //Quad1
-    if (line.begin.x <= line.end.x && line.begin.y <= line.end.y ) {
+    if ([self isQ1:line]) {
         return [UIColor orangeColor];
-    } else if (line.begin.x >= line.end.x && line.begin.y < line.end.y){
+    } else if ([self isQ2:line]){
         return [UIColor greenColor];
-    } else if (line.begin.x > line.end.x && line.begin.y >= line.end.y) {
+    } else if ([self isQ3:line]) {
         return [UIColor blueColor];
     } else {
         return [UIColor yellowColor];
     }
 }
 
-
 -(UIColor *)randomColor
 {
-    
     float red = (arc4random() % 100)/100.0;
     float green = (arc4random() % 100)/100.0;
     float blue = (arc4random() % 100)/100.0;
@@ -140,5 +132,20 @@
     UIColor *color = [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
     return color;
 }
+
+#pragma mark - helper methods
+- (BOOL)isQ1:(BNRLine *)line
+{
+    return line.begin.x <= line.end.x && line.begin.y <= line.end.y;
+}
+- (BOOL)isQ2:(BNRLine *)line
+{
+    return line.begin.x >= line.end.x && line.begin.y < line.end.y;
+}
+- (BOOL)isQ3:(BNRLine *)line
+{
+    return line.begin.x > line.end.x && line.begin.y >= line.end.y;
+}
+
 
 @end
