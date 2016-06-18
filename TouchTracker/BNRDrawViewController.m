@@ -34,6 +34,11 @@
                                              selector:@selector(getData)
                                                  name:@"UIApplicationDidBecomeActiveNotification"
                                                object:nil];
+    
+    UIButton *clearButton = [[UIButton alloc] initWithFrame:CGRectMake(5, 20, 100, 30)];
+    [clearButton setTitle:@"Clear Board" forState:UIControlStateNormal];
+    [clearButton addTarget:self action:@selector(clear) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:clearButton];
 
 }
 
@@ -51,6 +56,12 @@
         NSMutableArray *myData = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         self.backgroundView.finishedLines = myData;
     }
+}
+
+- (void)clear
+{
+    [self.backgroundView.finishedLines removeAllObjects];
+    [self.view setNeedsDisplay];
 }
 
 - (void)dealloc
