@@ -13,6 +13,7 @@
 
 @property (nonatomic, strong) NSMutableDictionary *linesInProgress;
 @property (nonatomic, strong) NSMutableArray *finishedLines;
+@property (nonatomic, weak) BNRLine *selectedLine; // weak reference because finishedLine will hold strong reference to line
 @end
 
 @implementation BNRDrawView
