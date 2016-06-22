@@ -146,11 +146,23 @@
 {
     NSLog(@"Tap recognized");
     
-    self.selectedLine = [self lineAtPoint:[gr locationInView:self]];
+    CGPoint point = [gr locationInView:self];
+    self.selectedLine = [self lineAtPoint:point];
+    
+    if(self.selectedLine) {
+        [self becomeFirstResponder];
+        
+        UIMenuController *menu = [UIMenuController sharedMenuController];
+        UIMenuItem *delete = [[UIMenuItem alloc] initWithTitle:@"Delete" action:@selector(deleteLine:)];
+        menu.menuItems = @[delete];
+        [menu setTargetRect:CGRectMake(point.x, point.y, 2, 2) inView:self];
+        [menu setMenuVisible:YES animated:YES];
+    } else {
+        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+    }
+    
     [self setNeedsDisplay];
 }
-
-
 
 - (BNRLine *)lineAtPoint:(CGPoint)point
 {
@@ -172,4 +184,17 @@
     NSLog(@"sent nil");
     return nil;
 }
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+
+- (void)deleteLine:(id)sender
+{
+    [self.finishedLines removeObject:self.selectedLine];
+    [self setNeedsDisplay];
+}
+
 @end
