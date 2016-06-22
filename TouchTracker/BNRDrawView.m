@@ -65,6 +65,11 @@
     for (NSValue *key in self.linesInProgress) {
         [self strokeLine:self.linesInProgress[key]];
     }
+    
+    if(self.selectedLine){
+        [[UIColor greenColor] set];
+        [self strokeLine:self.selectedLine];
+    }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -141,5 +146,30 @@
 {
     NSLog(@"Tap recognized");
     
+    self.selectedLine = [self lineAtPoint:[gr locationInView:self]];
+    [self setNeedsDisplay];
+}
+
+
+
+- (BNRLine *)lineAtPoint:(CGPoint)point
+{
+    for (BNRLine *line in self.finishedLines) {
+        CGPoint start = line.begin;
+        CGPoint end = line.end;
+        
+        for(float t = 0.0; t <= 1.0; t += 0.5) {
+            float x = start.x + t * (end.x - start.x);
+            float y = start.y + t * (end.y - start.y);
+            
+            if (hypot(x - point.x, y - point.y) < 20.0) {
+                return line;
+            }
+        }
+        
+    }
+    
+    NSLog(@"sent nil");
+    return nil;
 }
 @end
