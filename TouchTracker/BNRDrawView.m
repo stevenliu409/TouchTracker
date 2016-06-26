@@ -31,25 +31,37 @@
 {
     for (BNRLine *line in self.finishedLines) {
         [self strokeLine:line];
+//        [self strokeCircle:line];
     }
     
     [[UIColor redColor] set];
     for (NSValue *key in self.linesInProgress) {
         [self strokeLine:self.linesInProgress[key]];
+//        [self strokeCircle:self.linesInProgress[key]];
     }
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"%@", NSStringFromSelector(_cmd)); // log the name of the current method
-    for (UITouch *t in touches) {
-        CGPoint location = [t locationInView:self];
-        BNRLine *line = [[BNRLine alloc] init];
-        line.begin = location;
-        line.end = location;
+    NSLog(@"size of touches %ld", (unsigned long)[touches count]);
+    
+    if ([touches count] == 2) {
+        NSArray *touchArray = [touches allObjects];
         
-        NSValue *key = [NSValue valueWithNonretainedObject:t];
-        self.linesInProgress[key] = line;
+        
+    }
+    else {
+        for (UITouch *t in touches) {
+            CGPoint location = [t locationInView:self];
+            BNRLine *line = [[BNRLine alloc] init];
+            line.type = typeLine;
+            line.begin = location;
+            line.end = location;
+            
+            NSValue *key = [NSValue valueWithNonretainedObject:t];
+            self.linesInProgress[key] = line;
+        }
     }
     
     [self setNeedsDisplay];
@@ -110,6 +122,20 @@
     [bp stroke];
 }
 
+
+- (void)strokeCircle:(BNRLine *)line
+{
+    [line.color set];
+    UIBezierPath *bp = [UIBezierPath bezierPathWithArcCenter:line.begin
+                                                      radius:[self distanceBetweenA:line.begin andB:line.end]
+                                                  startAngle:0
+                                                    endAngle:M_PI * 2
+                                                   clockwise:YES];
+    bp.lineWidth = 10;
+    bp.lineCapStyle = kCGLineCapRound;
+    [bp stroke];
+}
+
 - (UIColor *)colorWithLine:(BNRLine *)line
 {
     if ([self isQ1:line]) {
@@ -145,6 +171,13 @@
 - (BOOL)isQ3:(BNRLine *)line
 {
     return line.begin.x > line.end.x && line.begin.y >= line.end.y;
+}
+
+- (CGFloat)distanceBetweenA:(CGPoint)a andB:(CGPoint)b
+{
+    CGFloat distance = pow((b.x - a.x), 2)  + pow((b.y - a.y), 2);
+    distance = sqrtf(distance);
+    return distance;
 }
 
 

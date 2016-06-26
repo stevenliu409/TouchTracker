@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <UIKit/UIKit.h>
+#import "BNRShape.h"
 
-@interface BNRLine : NSObject <NSCoding>
+@interface BNRLine : BNRShape <NSCoding>
 
 @property (nonatomic, assign) CGPoint begin;
 @property (nonatomic, assign) CGPoint end;

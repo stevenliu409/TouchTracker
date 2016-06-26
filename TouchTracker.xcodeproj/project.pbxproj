@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		267209891D209BF0005E810D /* BNRDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ECD0D61D13915600C53AF8 /* BNRDrawView.m */; };
+		2672098A1D209BF4005E810D /* BNRLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ECD0D31D13908C00C53AF8 /* BNRLine.m */; };
+		2672098B1D209BF9005E810D /* BNRShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 264A20781D20966C0041129F /* BNRShape.m */; };
+		2672098C1D209BFD005E810D /* BNRCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 264A207B1D2098140041129F /* BNRCircle.m */; };
 		26ECD0AF1D13907300C53AF8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ECD0AE1D13907300C53AF8 /* main.m */; };
 		26ECD0B21D13907300C53AF8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ECD0B11D13907300C53AF8 /* AppDelegate.m */; };
 		26ECD0BA1D13907300C53AF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26ECD0B91D13907300C53AF8 /* Assets.xcassets */; };
 		26ECD0BD1D13907300C53AF8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26ECD0BB1D13907300C53AF8 /* LaunchScreen.storyboard */; };
 		26ECD0C81D13907300C53AF8 /* TouchTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ECD0C71D13907300C53AF8 /* TouchTrackerTests.m */; };
-		26ECD0D41D13908C00C53AF8 /* BNRLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ECD0D31D13908C00C53AF8 /* BNRLine.m */; };
-		26ECD0D71D13915600C53AF8 /* BNRDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ECD0D61D13915600C53AF8 /* BNRDrawView.m */; };
 		26ECD0DA1D1391CD00C53AF8 /* BNRDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ECD0D91D1391CD00C53AF8 /* BNRDrawViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +30,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		264A20771D20966C0041129F /* BNRShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRShape.h; sourceTree = "<group>"; };
+		264A20781D20966C0041129F /* BNRShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRShape.m; sourceTree = "<group>"; };
+		264A207A1D2098140041129F /* BNRCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRCircle.h; sourceTree = "<group>"; };
+		264A207B1D2098140041129F /* BNRCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRCircle.m; sourceTree = "<group>"; };
 		26ECD0AA1D13907300C53AF8 /* TouchTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouchTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26ECD0AE1D13907300C53AF8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		26ECD0B01D13907300C53AF8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -85,6 +91,8 @@
 		26ECD0AC1D13907300C53AF8 /* TouchTracker */ = {
 			isa = PBXGroup;
 			children = (
+				264A207A1D2098140041129F /* BNRCircle.h */,
+				264A207B1D2098140041129F /* BNRCircle.m */,
 				26ECD0B01D13907300C53AF8 /* AppDelegate.h */,
 				26ECD0B11D13907300C53AF8 /* AppDelegate.m */,
 				26ECD0B91D13907300C53AF8 /* Assets.xcassets */,
@@ -97,6 +105,8 @@
 				26ECD0D61D13915600C53AF8 /* BNRDrawView.m */,
 				26ECD0D81D1391CD00C53AF8 /* BNRDrawViewController.h */,
 				26ECD0D91D1391CD00C53AF8 /* BNRDrawViewController.m */,
+				264A20771D20966C0041129F /* BNRShape.h */,
+				264A20781D20966C0041129F /* BNRShape.m */,
 			);
 			path = TouchTracker;
 			sourceTree = "<group>";
@@ -217,10 +227,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26ECD0D71D13915600C53AF8 /* BNRDrawView.m in Sources */,
+				2672098C1D209BFD005E810D /* BNRCircle.m in Sources */,
+				2672098B1D209BF9005E810D /* BNRShape.m in Sources */,
+				2672098A1D209BF4005E810D /* BNRLine.m in Sources */,
+				267209891D209BF0005E810D /* BNRDrawView.m in Sources */,
 				26ECD0DA1D1391CD00C53AF8 /* BNRDrawViewController.m in Sources */,
 				26ECD0B21D13907300C53AF8 /* AppDelegate.m in Sources */,
-				26ECD0D41D13908C00C53AF8 /* BNRLine.m in Sources */,
 				26ECD0AF1D13907300C53AF8 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,6 +416,7 @@
 				26ECD0CE1D13907300C53AF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		26ECD0CF1D13907300C53AF8 /* Build configuration list for PBXNativeTarget "TouchTrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +425,7 @@
 				26ECD0D11D13907300C53AF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
