@@ -26,4 +26,45 @@
     return self;
 }
 
+
++ (void)strokeLine:(BNRLine *)line
+{
+    
+    [line.color set];
+    UIBezierPath *bp = [UIBezierPath bezierPath];
+    bp.lineWidth = 10;
+    bp.lineCapStyle = kCGLineCapRound;
+    [bp moveToPoint:line.begin];
+    [bp addLineToPoint:line.end];
+    [bp stroke];
+}
+
+
++ (UIColor *)colorWithLine:(BNRLine *)line
+{
+    if ([self isQ1:line]) {
+        return [UIColor orangeColor];
+    } else if ([self isQ2:line]){
+        return [UIColor greenColor];
+    } else if ([self isQ3:line]) {
+        return [UIColor blueColor];
+    } else {
+        return [UIColor yellowColor];
+    }
+}
+
+
++ (BOOL)isQ1:(BNRLine *)line
+{
+    return line.begin.x <= line.end.x && line.begin.y <= line.end.y;
+}
++ (BOOL)isQ2:(BNRLine *)line
+{
+    return line.begin.x >= line.end.x && line.begin.y < line.end.y;
+}
++ (BOOL)isQ3:(BNRLine *)line
+{
+    return line.begin.x > line.end.x && line.begin.y >= line.end.y;
+}
+
 @end

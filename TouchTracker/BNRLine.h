@@ -17,4 +17,6 @@
 @property (nonatomic, assign) CGPoint end;
 @property (nonatomic, strong) UIColor *color;
 
++ (UIColor *)colorWithLine:(BNRLine *)line;
+
 @end

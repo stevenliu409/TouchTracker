@@ -30,14 +30,12 @@
 - (void)drawRect:(CGRect)rect
 {
     for (BNRLine *line in self.finishedLines) {
-        [self strokeLine:line];
-//        [self strokeCircle:line];
+        [BNRLine strokeLine:line];
     }
     
     [[UIColor redColor] set];
     for (NSValue *key in self.linesInProgress) {
-        [self strokeLine:self.linesInProgress[key]];
-//        [self strokeCircle:self.linesInProgress[key]];
+        [BNRLine strokeLine:self.linesInProgress[key]];
     }
 }
 
@@ -48,8 +46,6 @@
     
     if ([touches count] == 2) {
         NSArray *touchArray = [touches allObjects];
-        
-        
     }
     else {
         for (UITouch *t in touches) {
@@ -89,7 +85,7 @@
     for (UITouch *t in touches) {
         NSValue *key = [NSValue valueWithNonretainedObject:t];
         BNRLine *line = self.linesInProgress[key];
-        line.color = [self colorWithLine:line];
+        line.color = [BNRLine colorWithLine:line];
         [self.finishedLines addObject:line];
         [self.linesInProgress removeObjectForKey:key];
     }
@@ -110,17 +106,7 @@
     [self setNeedsDisplay];
 }
 
-- (void)strokeLine:(BNRLine *)line
-{
-    
-    [line.color set];
-    UIBezierPath *bp = [UIBezierPath bezierPath];
-    bp.lineWidth = 10;
-    bp.lineCapStyle = kCGLineCapRound;
-    [bp moveToPoint:line.begin];
-    [bp addLineToPoint:line.end];
-    [bp stroke];
-}
+
 
 
 - (void)strokeCircle:(BNRLine *)line
@@ -136,18 +122,7 @@
     [bp stroke];
 }
 
-- (UIColor *)colorWithLine:(BNRLine *)line
-{
-    if ([self isQ1:line]) {
-        return [UIColor orangeColor];
-    } else if ([self isQ2:line]){
-        return [UIColor greenColor];
-    } else if ([self isQ3:line]) {
-        return [UIColor blueColor];
-    } else {
-        return [UIColor yellowColor];
-    }
-}
+
 
 -(UIColor *)randomColor
 {
@@ -160,18 +135,7 @@
 }
 
 #pragma mark - helper methods
-- (BOOL)isQ1:(BNRLine *)line
-{
-    return line.begin.x <= line.end.x && line.begin.y <= line.end.y;
-}
-- (BOOL)isQ2:(BNRLine *)line
-{
-    return line.begin.x >= line.end.x && line.begin.y < line.end.y;
-}
-- (BOOL)isQ3:(BNRLine *)line
-{
-    return line.begin.x > line.end.x && line.begin.y >= line.end.y;
-}
+
 
 - (CGFloat)distanceBetweenA:(CGPoint)a andB:(CGPoint)b
 {

@@ -10,4 +10,11 @@
 
 @implementation BNRShape
 
+
++ (void)strokeLine:(BNRShape *)line
+{
+    
+}
+
+
 @end
