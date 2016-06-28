@@ -7,6 +7,8 @@
 //
 // Please Subclass
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
+#import <UIKit/UIKit.h>
 
 @interface BNRShape : NSObject
 
@@ -17,6 +19,6 @@ typedef enum {
 
 
 @property (nonatomic, assign) ShapeType type;
-+ (void)strokeLine:(BNRShape *)line;
+- (void)drawShape;
 
 @end

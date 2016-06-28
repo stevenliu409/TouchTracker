@@ -27,44 +27,43 @@
 }
 
 
-+ (void)strokeLine:(BNRLine *)line
+- (void)draw
 {
-    
-    [line.color set];
+    [self.color set];
     UIBezierPath *bp = [UIBezierPath bezierPath];
     bp.lineWidth = 10;
     bp.lineCapStyle = kCGLineCapRound;
-    [bp moveToPoint:line.begin];
-    [bp addLineToPoint:line.end];
+    [bp moveToPoint:self.begin];
+    [bp addLineToPoint:self.end];
     [bp stroke];
 }
 
 
-+ (UIColor *)colorWithLine:(BNRLine *)line
+- (void)setLineColor
 {
-    if ([self isQ1:line]) {
-        return [UIColor orangeColor];
-    } else if ([self isQ2:line]){
-        return [UIColor greenColor];
-    } else if ([self isQ3:line]) {
-        return [UIColor blueColor];
+    if ([self isQ1]) {
+        self.color = [UIColor orangeColor];
+    } else if ([self isQ2]){
+        self.color = [UIColor greenColor];
+    } else if ([self isQ3]) {
+        self.color = [UIColor blueColor];
     } else {
-        return [UIColor yellowColor];
+        self.color = [UIColor yellowColor];
     }
 }
 
 
-+ (BOOL)isQ1:(BNRLine *)line
+- (BOOL)isQ1
 {
-    return line.begin.x <= line.end.x && line.begin.y <= line.end.y;
+    return self.begin.x <= self.end.x && self.begin.y <= self.end.y;
 }
-+ (BOOL)isQ2:(BNRLine *)line
+- (BOOL)isQ2
 {
-    return line.begin.x >= line.end.x && line.begin.y < line.end.y;
+    return self.begin.x >= self.end.x && self.begin.y < self.end.y;
 }
-+ (BOOL)isQ3:(BNRLine *)line
+- (BOOL)isQ3
 {
-    return line.begin.x > line.end.x && line.begin.y >= line.end.y;
+    return self.begin.x > self.end.x && self.begin.y >= self.end.y;
 }
 
 @end
