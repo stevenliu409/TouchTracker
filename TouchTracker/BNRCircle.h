@@ -12,6 +12,5 @@
 
 @property (nonatomic, assign) CGPoint center;
 @property (nonatomic, assign) CGFloat radius;
-@property (nonatomic, strong) UIColor *color;
 
 @end

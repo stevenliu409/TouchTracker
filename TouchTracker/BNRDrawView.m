@@ -33,7 +33,6 @@
         [line drawShape];
     }
     
-    [[UIColor redColor] set];
     for (NSValue *key in self.linesInProgress) {
         [self.linesInProgress[key] drawShape];
     }
@@ -46,12 +45,13 @@
     
     if ([touches count] == 2) {
         NSArray *touchArray = [touches allObjects];
+        
     }
     else {
         for (UITouch *t in touches) {
             CGPoint location = [t locationInView:self];
             BNRLine *line = [[BNRLine alloc] init];
-            line.type = typeLine;
+            line.color = [UIColor redColor];
             line.begin = location;
             line.end = location;
             
@@ -105,22 +105,4 @@
     
     [self setNeedsDisplay];
 }
-
-
--(UIColor *)randomColor
-{
-    float red = (arc4random() % 100)/100.0;
-    float green = (arc4random() % 100)/100.0;
-    float blue = (arc4random() % 100)/100.0;
-
-    UIColor *color = [UIColor colorWithRed:red green:green blue:blue alpha:1.0];
-    return color;
-}
-
-
-
-
-
-
-
 @end

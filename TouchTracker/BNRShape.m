@@ -10,10 +10,8 @@
 
 @implementation BNRShape
 
-
-+ (void)strokeLine:(BNRShape *)line
+- (void)drawShape
 {
-    
 }
 
 

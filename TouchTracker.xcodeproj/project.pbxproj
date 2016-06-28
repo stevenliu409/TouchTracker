@@ -70,6 +70,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		26A5EDDC1D22299600CAD452 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				264A20771D20966C0041129F /* BNRShape.h */,
+				264A20781D20966C0041129F /* BNRShape.m */,
+				26ECD0D21D13908C00C53AF8 /* BNRLine.h */,
+				26ECD0D31D13908C00C53AF8 /* BNRLine.m */,
+				264A207A1D2098140041129F /* BNRCircle.h */,
+				264A207B1D2098140041129F /* BNRCircle.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		26ECD0A11D13907300C53AF8 = {
 			isa = PBXGroup;
 			children = (
@@ -91,22 +104,17 @@
 		26ECD0AC1D13907300C53AF8 /* TouchTracker */ = {
 			isa = PBXGroup;
 			children = (
-				264A207A1D2098140041129F /* BNRCircle.h */,
-				264A207B1D2098140041129F /* BNRCircle.m */,
+				26A5EDDC1D22299600CAD452 /* Model */,
 				26ECD0B01D13907300C53AF8 /* AppDelegate.h */,
 				26ECD0B11D13907300C53AF8 /* AppDelegate.m */,
 				26ECD0B91D13907300C53AF8 /* Assets.xcassets */,
 				26ECD0BB1D13907300C53AF8 /* LaunchScreen.storyboard */,
 				26ECD0BE1D13907300C53AF8 /* Info.plist */,
 				26ECD0AD1D13907300C53AF8 /* Supporting Files */,
-				26ECD0D21D13908C00C53AF8 /* BNRLine.h */,
-				26ECD0D31D13908C00C53AF8 /* BNRLine.m */,
 				26ECD0D51D13915600C53AF8 /* BNRDrawView.h */,
 				26ECD0D61D13915600C53AF8 /* BNRDrawView.m */,
 				26ECD0D81D1391CD00C53AF8 /* BNRDrawViewController.h */,
 				26ECD0D91D1391CD00C53AF8 /* BNRDrawViewController.m */,
-				264A20771D20966C0041129F /* BNRShape.h */,
-				264A20781D20966C0041129F /* BNRShape.m */,
 			);
 			path = TouchTracker;
 			sourceTree = "<group>";

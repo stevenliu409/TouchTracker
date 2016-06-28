@@ -12,13 +12,8 @@
 
 @interface BNRShape : NSObject
 
-typedef enum {
-    typeCircle,
-    typeLine
-} ShapeType;
+@property (nonatomic, strong) UIColor *color;
 
-
-@property (nonatomic, assign) ShapeType type;
 - (void)drawShape;
 
 @end

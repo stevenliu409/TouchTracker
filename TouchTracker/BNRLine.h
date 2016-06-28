@@ -12,7 +12,6 @@
 
 @property (nonatomic, assign) CGPoint begin;
 @property (nonatomic, assign) CGPoint end;
-@property (nonatomic, strong) UIColor *color;
 
 - (void)setLineColor;
 - (void)drawShape;
