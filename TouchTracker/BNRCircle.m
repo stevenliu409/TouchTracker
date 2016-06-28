@@ -10,9 +10,9 @@
 
 @implementation BNRCircle
 
-- (void)strokeCircle:(BNRCircle *)circle
+- (void)drawShape
 {
-    [circle.color set];
+    [self.color set];
     UIBezierPath *bp = [UIBezierPath bezierPathWithArcCenter:self.center
                                                       radius:self.radius
                                                   startAngle:0
@@ -23,11 +23,17 @@
     [bp stroke];
 }
 
-- (CGFloat)distanceBetweenA:(CGPoint)a andB:(CGPoint)b
++ (CGFloat)distanceBetweenA:(CGPoint)a andB:(CGPoint)b
 {
     CGFloat distance = pow((b.x - a.x), 2)  + pow((b.y - a.y), 2);
     distance = sqrtf(distance);
     return distance;
 }
-
++ (CGPoint)centerBetweenA:(CGPoint)a andB:(CGPoint)b
+{
+    CGPoint center;
+    center.x = (a.x + b.x)/2;
+    center.y = (a.y + b.y)/2;
+    return center;
+}
 @end

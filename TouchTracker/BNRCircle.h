@@ -13,4 +13,7 @@
 @property (nonatomic, assign) CGPoint center;
 @property (nonatomic, assign) CGFloat radius;
 
++ (CGFloat)distanceBetweenA:(CGPoint)a andB:(CGPoint)b;
++ (CGPoint)centerBetweenA:(CGPoint)a andB:(CGPoint)b;
+
 @end

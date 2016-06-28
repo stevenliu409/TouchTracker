@@ -8,6 +8,7 @@
 
 #import "BNRDrawView.h"
 #import "BNRLine.h"
+#import "BNRCircle.h"
 
 @interface BNRDrawView()
 
@@ -45,7 +46,14 @@
     
     if ([touches count] == 2) {
         NSArray *touchArray = [touches allObjects];
-        
+        BNRCircle *circle = [[BNRCircle alloc] init];
+        circle.color = [UIColor redColor];
+        CGPoint pointA = [touchArray[0] locationInView:self];
+        CGPoint pointB = [touchArray[1] locationInView:self];
+        circle.center = [BNRCircle centerBetweenA:pointA andB:pointB];
+        circle.radius = [BNRCircle distanceBetweenA:pointA andB:pointB]/2;
+        NSValue *key = [NSValue valueWithNonretainedObject:touchArray[1]];
+        self.linesInProgress[key] = circle;
     }
     else {
         for (UITouch *t in touches) {
@@ -68,10 +76,19 @@
 
     NSLog(@"%@", NSStringFromSelector(_cmd)); // log the name of the current method
     
-    for (UITouch *t in touches) {
-        NSValue *key = [NSValue valueWithNonretainedObject:t];
-        BNRLine *line = self.linesInProgress[key];
-        line.end = [t locationInView:self];
+    if ([touches count] == 2) {
+        NSArray *touchArray = [touches allObjects];
+        NSValue *key = [NSValue valueWithNonretainedObject:touchArray[1]];
+        BNRCircle *circle = self.linesInProgress[key];
+        CGPoint pointA = [touchArray[0] locationInView:self];
+        CGPoint pointB = [touchArray[1] locationInView:self];
+        circle.radius = [BNRCircle distanceBetweenA:pointA andB:pointB];
+    } else {
+        for (UITouch *t in touches) {
+            NSValue *key = [NSValue valueWithNonretainedObject:t];
+            BNRLine *line = self.linesInProgress[key];
+            line.end = [t locationInView:self];
+        }
     }
     
     
@@ -82,12 +99,20 @@
 {
     NSLog(@"%@", NSStringFromSelector(_cmd)); // log the name of the current method
 
-    for (UITouch *t in touches) {
-        NSValue *key = [NSValue valueWithNonretainedObject:t];
-        BNRLine *line = self.linesInProgress[key];
-        [line setLineColor];
-        [self.finishedLines addObject:line];
+    if ([touches count] == 2) {
+        NSArray *touchArray = [touches allObjects];
+        NSValue *key = [NSValue valueWithNonretainedObject:touchArray[1]];
+        BNRCircle *circle = self.linesInProgress[key];
+        [self.finishedLines addObject:circle];
         [self.linesInProgress removeObjectForKey:key];
+    } else {
+        for (UITouch *t in touches) {
+            NSValue *key = [NSValue valueWithNonretainedObject:t];
+            BNRLine *line = self.linesInProgress[key];
+            [line setLineColor];
+            [self.finishedLines addObject:line];
+            [self.linesInProgress removeObjectForKey:key];
+        }
     }
     
     [self setNeedsDisplay];
@@ -97,10 +122,15 @@
 - (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     NSLog(@"%@", NSStringFromSelector(_cmd)); // log the name of the current method
-    
-    for (UITouch *touch in touches) {
-        NSValue *key = [NSValue valueWithNonretainedObject:touch];
+    if ([touches count] == 2) {
+        NSArray *touchArray = [touches allObjects];
+        NSValue *key = [NSValue valueWithNonretainedObject:touchArray[1]];
         [self.linesInProgress removeObjectForKey:key];
+    } else {
+        for (UITouch *touch in touches) {
+            NSValue *key = [NSValue valueWithNonretainedObject:touch];
+            [self.linesInProgress removeObjectForKey:key];
+        }
     }
     
     [self setNeedsDisplay];
