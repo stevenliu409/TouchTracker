@@ -27,7 +27,7 @@
 }
 
 
-- (void)draw
+- (void)drawShape
 {
     [self.color set];
     UIBezierPath *bp = [UIBezierPath bezierPath];

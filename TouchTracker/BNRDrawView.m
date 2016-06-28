@@ -29,7 +29,7 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    for (BNRLine *line in self.finishedLines) {
+    for (BNRShape *line in self.finishedLines) {
         [line drawShape];
     }
     
