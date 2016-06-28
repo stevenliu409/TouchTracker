@@ -61,6 +61,7 @@
 - (void)clear
 {
     [self.backgroundView.finishedLines removeAllObjects];
+    [self.backgroundView.linesInProgress removeAllObjects];
     [self.view setNeedsDisplay];
 }
 

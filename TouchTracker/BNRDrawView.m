@@ -79,15 +79,19 @@
     if ([touches count] == 2) {
         NSArray *touchArray = [touches allObjects];
         NSValue *key = [NSValue valueWithNonretainedObject:touchArray[1]];
-        BNRCircle *circle = self.linesInProgress[key];
-        CGPoint pointA = [touchArray[0] locationInView:self];
-        CGPoint pointB = [touchArray[1] locationInView:self];
-        circle.radius = [BNRCircle distanceBetweenA:pointA andB:pointB];
+        if ([self.linesInProgress[key] isKindOfClass:[BNRCircle class]]) {
+            BNRCircle *circle = self.linesInProgress[key];
+            CGPoint pointA = [touchArray[0] locationInView:self];
+            CGPoint pointB = [touchArray[1] locationInView:self];
+            circle.radius = [BNRCircle distanceBetweenA:pointA andB:pointB];
+        }
     } else {
         for (UITouch *t in touches) {
             NSValue *key = [NSValue valueWithNonretainedObject:t];
-            BNRLine *line = self.linesInProgress[key];
-            line.end = [t locationInView:self];
+            if ([self.linesInProgress[key] isKindOfClass:[BNRLine class]]) {
+                BNRLine *line = self.linesInProgress[key];
+                line.end = [t locationInView:self];
+            }
         }
     }
     
@@ -102,15 +106,19 @@
     if ([touches count] == 2) {
         NSArray *touchArray = [touches allObjects];
         NSValue *key = [NSValue valueWithNonretainedObject:touchArray[1]];
-        BNRCircle *circle = self.linesInProgress[key];
-        [self.finishedLines addObject:circle];
+        if ([self.linesInProgress[key] isKindOfClass:[BNRCircle class]]) {
+            BNRCircle *circle = self.linesInProgress[key];
+            [self.finishedLines addObject:circle];
+        }
         [self.linesInProgress removeObjectForKey:key];
     } else {
         for (UITouch *t in touches) {
             NSValue *key = [NSValue valueWithNonretainedObject:t];
-            BNRLine *line = self.linesInProgress[key];
-            [line setLineColor];
-            [self.finishedLines addObject:line];
+            if ([self.linesInProgress[key] isKindOfClass:[BNRLine class]]) {
+                BNRLine *line = self.linesInProgress[key];
+                [line setLineColor];
+                [self.finishedLines addObject:line];
+            }
             [self.linesInProgress removeObjectForKey:key];
         }
     }
