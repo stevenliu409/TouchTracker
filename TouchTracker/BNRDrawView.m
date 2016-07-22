@@ -38,6 +38,12 @@
         tapRecognizer.delaysTouchesBegan = YES;
         [tapRecognizer requireGestureRecognizerToFail:doubleTapRecognizer];
         [self addGestureRecognizer:tapRecognizer];
+        
+        
+        UILongPressGestureRecognizer *pressRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                      action:@selector(longPress:)];
+        
+        [self addGestureRecognizer:pressRecognizer];
     }
     return self;
 }
@@ -142,6 +148,22 @@
     [self setNeedsDisplay];
 }
 
+- (void)longPress:(UIGestureRecognizer *)lp
+{
+    if(lp.state == UIGestureRecognizerStateBegan) {
+        CGPoint point = [lp locationInView:self];
+        self.selectedLine = [self lineAtPoint:point];
+        
+        if(self.selectedLine) {
+            [self.linesInProgress removeAllObjects];
+        }
+    } else if (lp.state == UIGestureRecognizerStateEnded) {
+        self.selectedLine = nil;
+    }
+    [self setNeedsDisplay];
+}
+
+
 - (void)tap:(UIGestureRecognizer *)gr
 {
     NSLog(@"Tap recognized");
@@ -163,6 +185,7 @@
     
     [self setNeedsDisplay];
 }
+
 
 - (BNRLine *)lineAtPoint:(CGPoint)point
 {
