@@ -232,4 +232,26 @@
     [self setNeedsDisplay];
 }
 
+
+- (void)moveLine:(UIPanGestureRecognizer *)gr
+{
+    if(!self.selectedLine) return;
+    
+    if(gr.state == UIGestureRecognizerStateChanged) {
+        CGPoint translation = [gr translationInView:self];
+        
+        CGPoint begin = self.selectedLine.begin;
+        CGPoint end = self.selectedLine.end;
+        begin.x += translation.x;
+        begin.y += translation.y;
+        end.x += translation.x;
+        end.y += translation.y;
+        
+        self.selectedLine.begin = begin;
+        self.selectedLine.end = end;
+        
+        [self setNeedsDisplay];
+        [gr setTranslation:CGPointZero inView:self];
+    }
+}
 @end
