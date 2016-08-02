@@ -235,11 +235,16 @@
 
 - (void)moveLine:(UIPanGestureRecognizer *)gr
 {
-    if(!self.selectedLine) return;
+    if(!self.selectedLine) {
+        self.moveRecognizer.cancelsTouchesInView = NO;
+        return;
+    }
     
     if(gr.state == UIGestureRecognizerStateChanged) {
-        CGPoint translation = [gr translationInView:self];
-        
+        self.moveRecognizer.cancelsTouchesInView = YES;
+        [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
+
+        CGPoint translation = [gr translationInView:self];        
         CGPoint begin = self.selectedLine.begin;
         CGPoint end = self.selectedLine.end;
         begin.x += translation.x;
