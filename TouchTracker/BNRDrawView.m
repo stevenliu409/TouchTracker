@@ -58,7 +58,7 @@
 - (void)strokeLine:(BNRLine *)line
 {
     UIBezierPath *bp = [UIBezierPath bezierPath];
-    bp.lineWidth = 10;
+    bp.lineWidth = line.width;
     bp.lineCapStyle = kCGLineCapRound;
     [bp moveToPoint:line.begin];
     [bp addLineToPoint:line.end];
@@ -92,7 +92,7 @@
         BNRLine *line = [[BNRLine alloc] init];
         line.begin = location;
         line.end = location;
-        
+        line.width = 10.0;
         NSValue *key = [NSValue valueWithNonretainedObject:t]; // Use the memory address of the object as a key 
         self.linesInProgress[key] = line;
     }
@@ -243,8 +243,7 @@
     if(gr.state == UIGestureRecognizerStateChanged) {
         self.moveRecognizer.cancelsTouchesInView = YES;
         [[UIMenuController sharedMenuController] setMenuVisible:NO animated:YES];
-
-        CGPoint translation = [gr translationInView:self];        
+        CGPoint translation = [gr translationInView:self];
         CGPoint begin = self.selectedLine.begin;
         CGPoint end = self.selectedLine.end;
         begin.x += translation.x;
