@@ -220,6 +220,9 @@
     return NO;
 }
 
+/*
+ * the UIMenuController must be the first responder of the window. Must override this method to use UIMenuController
+ */
 - (BOOL)canBecomeFirstResponder
 {
     return YES;
