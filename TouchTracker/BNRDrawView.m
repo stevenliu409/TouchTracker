@@ -92,8 +92,7 @@
         BNRLine *line = [[BNRLine alloc] init];
         line.begin = location;
         line.end = location;
-        line.width = 10.0;
-        NSValue *key = [NSValue valueWithNonretainedObject:t]; // Use the memory address of the object as a key 
+        NSValue *key = [NSValue valueWithNonretainedObject:t]; // Use the memory address of the object as a key
         self.linesInProgress[key] = line;
     }
     
@@ -109,6 +108,8 @@
         NSValue *key = [NSValue valueWithNonretainedObject:t];
         BNRLine *line = self.linesInProgress[key];
         line.end = [t locationInView:self];
+        CGPoint velocity = [self.moveRecognizer velocityInView:self];
+        line.width = (fabs(velocity.x) + fabs(velocity.y))/100.0;
     }
     
     
