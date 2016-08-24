@@ -10,7 +10,8 @@
 #import "BNRLine.h"
 
 @interface BNRDrawView() <UIGestureRecognizerDelegate>
-
+@property (nonatomic, strong) UIColor *chosenColor;
+@property (nonatomic, strong) UISwipeGestureRecognizer *tripleSwipeRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer *moveRecognizer;
 @property (nonatomic, strong) NSMutableDictionary *linesInProgress;
 @property (nonatomic, strong) NSMutableArray *finishedLines;
@@ -26,6 +27,7 @@
         self.linesInProgress = [[NSMutableDictionary alloc] init];
         self.finishedLines = [[NSMutableArray alloc] init];
         self.backgroundColor = [UIColor grayColor];
+        self.chosenColor = [UIColor blackColor];
         self.multipleTouchEnabled = YES;
         
         UITapGestureRecognizer *doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self
@@ -50,6 +52,13 @@
         self.moveRecognizer.delegate = self;
         self.moveRecognizer.cancelsTouchesInView = NO;
         [self addGestureRecognizer:self.moveRecognizer];
+        
+        
+        
+        self.tripleSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(colorPicker:)];
+        self.tripleSwipeRecognizer.numberOfTouchesRequired = 3;
+        self.tripleSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+        [self addGestureRecognizer:self.tripleSwipeRecognizer];
     }
     return self;
 }
@@ -68,8 +77,8 @@
 
 - (void)drawRect:(CGRect)rect
 {
-    [[UIColor blackColor] set];
     for (BNRLine *line in self.finishedLines) {
+        [line.color set];
         [self strokeLine:line];
     }
     
@@ -124,6 +133,7 @@
     for (UITouch *t in touches) {
         NSValue *key = [NSValue valueWithNonretainedObject:t];
         BNRLine *line = self.linesInProgress[key];
+        line.color = self.chosenColor;
         [self.finishedLines addObject:line];
         [self.linesInProgress removeObjectForKey:key];
     }
@@ -146,6 +156,45 @@
 }
 
 
+
+
+- (BNRLine *)lineAtPoint:(CGPoint)point
+{
+    for (BNRLine *line in self.finishedLines) {
+        CGPoint start = line.begin;
+        CGPoint end = line.end;
+        
+        for(float t = 0.0; t <= 1.0; t += 0.5) {
+            float x = start.x + t * (end.x - start.x);
+            float y = start.y + t * (end.y - start.y);
+            
+            if (hypot(x - point.x, y - point.y) < 20.0) {
+                return line;
+            }
+        }
+        
+    }
+    
+    NSLog(@"sent nil");
+    return nil;
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    if(gestureRecognizer == self.moveRecognizer) return YES;
+    return NO;
+}
+
+/*
+ * the UIMenuController must be the first responder of the window. Must override this method to use UIMenuController
+ */
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+
+#pragma mark - Gesture Recognizer Target Actions
 - (void)doubleTap:(UIGestureRecognizer *)gr
 {
     NSLog(@"Recognized double tap");
@@ -194,41 +243,6 @@
 }
 
 
-- (BNRLine *)lineAtPoint:(CGPoint)point
-{
-    for (BNRLine *line in self.finishedLines) {
-        CGPoint start = line.begin;
-        CGPoint end = line.end;
-        
-        for(float t = 0.0; t <= 1.0; t += 0.5) {
-            float x = start.x + t * (end.x - start.x);
-            float y = start.y + t * (end.y - start.y);
-            
-            if (hypot(x - point.x, y - point.y) < 20.0) {
-                return line;
-            }
-        }
-        
-    }
-    
-    NSLog(@"sent nil");
-    return nil;
-}
-
--(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
-{
-    if(gestureRecognizer == self.moveRecognizer) return YES;
-    return NO;
-}
-
-/*
- * the UIMenuController must be the first responder of the window. Must override this method to use UIMenuController
- */
-- (BOOL)canBecomeFirstResponder
-{
-    return YES;
-}
-
 
 - (void)deleteLine:(id)sender
 {
@@ -261,5 +275,12 @@
         [self setNeedsDisplay];
         [gr setTranslation:CGPointZero inView:self];
     }
+}
+
+- (void)colorPicker:(UISwipeGestureRecognizer *)gr
+{
+    //TODO: Add colour picker view controller
+    NSLog(@"swipe recognized");
+    self.chosenColor = [UIColor blueColor];
 }
 @end

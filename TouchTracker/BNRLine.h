@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import <UIKit/UIKit.h>
 
 @interface BNRLine : NSObject
 
@@ -15,4 +16,5 @@
 @property (nonatomic) CGPoint end;
 
 @property (nonatomic) CGFloat width;
+@property (nonatomic, strong) UIColor *color;
 @end
