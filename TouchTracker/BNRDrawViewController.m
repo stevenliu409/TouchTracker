@@ -36,12 +36,9 @@
 
 - (void)colorPicker:(UISwipeGestureRecognizer *)gr
 {
-    //TODO: Add colour picker view controller
-    NSLog(@"swipe recognized");
     BNRColorViewController *colorview = [[BNRColorViewController alloc] init];
     colorview.delegate = self;
     [self presentViewController:colorview animated:YES completion:nil];
-    
 }
 
 - (void)colorChosen:(UIColor *)color
