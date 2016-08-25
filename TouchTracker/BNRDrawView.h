@@ -10,4 +10,6 @@
 
 @interface BNRDrawView : UIView
 
+@property (nonatomic, strong) UIColor *chosenColor;
+
 @end

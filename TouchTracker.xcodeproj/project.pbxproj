@@ -15,6 +15,8 @@
 		26ECD0D41D13908C00C53AF8 /* BNRLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ECD0D31D13908C00C53AF8 /* BNRLine.m */; };
 		26ECD0D71D13915600C53AF8 /* BNRDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ECD0D61D13915600C53AF8 /* BNRDrawView.m */; };
 		26ECD0DA1D1391CD00C53AF8 /* BNRDrawViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26ECD0D91D1391CD00C53AF8 /* BNRDrawViewController.m */; };
+		26FDD16D1D6E29FA004240D8 /* BNRColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FDD16C1D6E29FA004240D8 /* BNRColorView.m */; };
+		26FDD1701D6E334F004240D8 /* BNRColorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26FDD16F1D6E334F004240D8 /* BNRColorViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +46,10 @@
 		26ECD0D61D13915600C53AF8 /* BNRDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDrawView.m; sourceTree = "<group>"; };
 		26ECD0D81D1391CD00C53AF8 /* BNRDrawViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRDrawViewController.h; sourceTree = "<group>"; };
 		26ECD0D91D1391CD00C53AF8 /* BNRDrawViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRDrawViewController.m; sourceTree = "<group>"; };
+		26FDD16B1D6E29FA004240D8 /* BNRColorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRColorView.h; sourceTree = "<group>"; };
+		26FDD16C1D6E29FA004240D8 /* BNRColorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRColorView.m; sourceTree = "<group>"; };
+		26FDD16E1D6E334F004240D8 /* BNRColorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BNRColorViewController.h; sourceTree = "<group>"; };
+		26FDD16F1D6E334F004240D8 /* BNRColorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BNRColorViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,10 @@
 				26ECD0D61D13915600C53AF8 /* BNRDrawView.m */,
 				26ECD0D81D1391CD00C53AF8 /* BNRDrawViewController.h */,
 				26ECD0D91D1391CD00C53AF8 /* BNRDrawViewController.m */,
+				26FDD16B1D6E29FA004240D8 /* BNRColorView.h */,
+				26FDD16C1D6E29FA004240D8 /* BNRColorView.m */,
+				26FDD16E1D6E334F004240D8 /* BNRColorViewController.h */,
+				26FDD16F1D6E334F004240D8 /* BNRColorViewController.m */,
 			);
 			path = TouchTracker;
 			sourceTree = "<group>";
@@ -217,7 +227,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26FDD1701D6E334F004240D8 /* BNRColorViewController.m in Sources */,
 				26ECD0D71D13915600C53AF8 /* BNRDrawView.m in Sources */,
+				26FDD16D1D6E29FA004240D8 /* BNRColorView.m in Sources */,
 				26ECD0DA1D1391CD00C53AF8 /* BNRDrawViewController.m in Sources */,
 				26ECD0B21D13907300C53AF8 /* AppDelegate.m in Sources */,
 				26ECD0D41D13908C00C53AF8 /* BNRLine.m in Sources */,
@@ -404,6 +416,7 @@
 				26ECD0CE1D13907300C53AF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		26ECD0CF1D13907300C53AF8 /* Build configuration list for PBXNativeTarget "TouchTrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +425,7 @@
 				26ECD0D11D13907300C53AF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

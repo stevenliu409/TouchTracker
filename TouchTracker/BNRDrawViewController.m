@@ -8,15 +8,46 @@
 
 #import "BNRDrawViewController.h"
 #import "BNRDrawView.h"
+#import "BNRColorViewController.h"
 
-@interface BNRDrawViewController ()
+
+@interface BNRDrawViewController () <BNRColorViewDelegate>
+
+@property (nonatomic, strong) UISwipeGestureRecognizer *tripleSwipeRecognizer;
+@property (nonatomic, strong) BNRDrawView *drawView;
 @end
 
 @implementation BNRDrawViewController
 
 - (void)loadView
 {
-    self.view = [[BNRDrawView alloc] initWithFrame:CGRectZero];
+    self.drawView = [[BNRDrawView alloc] initWithFrame:CGRectZero];
+    self.view = self.drawView;
 }
+
+- (void)viewDidLoad
+{
+    self.tripleSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(colorPicker:)];
+    self.tripleSwipeRecognizer.numberOfTouchesRequired = 3;
+    self.tripleSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
+    [self.view addGestureRecognizer:self.tripleSwipeRecognizer];
+
+}
+
+- (void)colorPicker:(UISwipeGestureRecognizer *)gr
+{
+    //TODO: Add colour picker view controller
+    NSLog(@"swipe recognized");
+    BNRColorViewController *colorview = [[BNRColorViewController alloc] init];
+    colorview.delegate = self;
+    [self presentViewController:colorview animated:YES completion:nil];
+    
+}
+
+- (void)colorChosen:(UIColor *)color
+{
+    self.drawView.chosenColor = color;
+}
+
 
 @end

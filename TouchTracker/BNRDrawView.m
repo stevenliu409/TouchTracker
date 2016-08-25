@@ -10,8 +10,6 @@
 #import "BNRLine.h"
 
 @interface BNRDrawView() <UIGestureRecognizerDelegate>
-@property (nonatomic, strong) UIColor *chosenColor;
-@property (nonatomic, strong) UISwipeGestureRecognizer *tripleSwipeRecognizer;
 @property (nonatomic, strong) UIPanGestureRecognizer *moveRecognizer;
 @property (nonatomic, strong) NSMutableDictionary *linesInProgress;
 @property (nonatomic, strong) NSMutableArray *finishedLines;
@@ -52,13 +50,6 @@
         self.moveRecognizer.delegate = self;
         self.moveRecognizer.cancelsTouchesInView = NO;
         [self addGestureRecognizer:self.moveRecognizer];
-        
-        
-        
-        self.tripleSwipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(colorPicker:)];
-        self.tripleSwipeRecognizer.numberOfTouchesRequired = 3;
-        self.tripleSwipeRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
-        [self addGestureRecognizer:self.tripleSwipeRecognizer];
     }
     return self;
 }
@@ -277,10 +268,4 @@
     }
 }
 
-- (void)colorPicker:(UISwipeGestureRecognizer *)gr
-{
-    //TODO: Add colour picker view controller
-    NSLog(@"swipe recognized");
-    self.chosenColor = [UIColor blueColor];
-}
 @end
