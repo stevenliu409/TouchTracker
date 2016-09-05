@@ -257,4 +257,15 @@
         [gr setTranslation:CGPointZero inView:self];
     }
 }
+
+
+- (int)numberOfLines
+{
+    int count = 0;
+    // check that they are non-nil before we add their counts...
+    if (self.linesInProgress && self.finishedLines) {
+        count = [self.linesInProgress count] + [self.finishedLines count];
+    }
+    return count;
+}
 @end

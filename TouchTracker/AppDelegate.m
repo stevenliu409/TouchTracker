@@ -22,6 +22,10 @@
     BNRDrawViewController *drawVC = [[BNRDrawViewController alloc] init];
     self.window.rootViewController = drawVC;
     
+#ifdef VIEW_DEBUG
+    NSLog(@"recurisve description = %@", [self.window performSelector:@selector(recursiveDescription)]);
+#endif
+    
     return YES;
 }
 
